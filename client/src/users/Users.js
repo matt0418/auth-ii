@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 import requireAuth from '../auth/requireAuth'
+import { withRouter } from 'react-router-dom'
 
 class Users extends React.Component {
 
@@ -20,6 +21,7 @@ class Users extends React.Component {
     }
 
     render() {
+        if (localStorage.getItem('jwt')) {
             return(
                 <div>
                     <h2>List of Peeps</h2>
@@ -32,7 +34,11 @@ class Users extends React.Component {
                     </div>
                 </div>
             )
+        } else {
+            this.props.history.push('/login')
+        }
+            
     }
 }
 
-export default requireAuth(Users)
+export default requireAuth(withRouter(Users))

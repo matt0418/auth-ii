@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { throws } from 'assert';
 
 axios.defaults.baseURL = 'http://localhost:5000/api'
 
@@ -25,7 +26,7 @@ export default function(Component1) {
                 </div>
             return(
                 <div>
-                    {token ? <Component1 {...this.props}/> : notLoggedIn}
+                    {token ? <Component1 {...this.props}/> : this.props.history.push('/login')}
                 </div>
             )
         }
